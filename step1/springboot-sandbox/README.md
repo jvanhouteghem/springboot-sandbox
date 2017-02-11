@@ -1,6 +1,6 @@
 # springboot-sandbox
-
-I- Display all beans
+ 
+## I.Display all beans
 
 - Create new package (for example com.jvanhouteghem.main)
 - Create new class and call it SpringBeanApplication
@@ -12,161 +12,159 @@ package com.jvanhouteghem.main;
 public class SpringBeanApplication {
 
     public static void main(final String[] args) throws Exception {
-    	//SpringApplication.run(WebApplication.class, args);
-    	
-    	ApplicationContext ctx = SpringApplication.run(SpringBeanApplication.class,  args);
-    	
-    	// Show all the beans that Spring just manages for us out of the box
-    	String[] beanNames = ctx.getBeanDefinitionNames();
-    	Arrays.sort(beanNames);
-    	for (String beanName : beanNames){
-    		System.out.println(beanName);
-    	} 	
+        //SpringApplication.run(WebApplication.class, args);
+
+        ApplicationContext ctx = SpringApplication.run(SpringBeanApplication.class,  args);
+
+        // Show all the beans that Spring just manages for us out of the box
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames){
+            System.out.println(beanName);
+        }   
     }
 
 }
 ```
 
-2- Our first bean
+## II. Our first bean
 
-- Create new package (for example com.jvanhouteghem.foo)
+Create new package (for example com.jvanhouteghem.foo)
 
-- Create new class in this package and call it User
+Create new class in this package and call it User
 
 ```java
 public class User {
-	
-	private String firstName;
-	private String lastName;
-	private String emailAdress;
-	
-	public User(String firstName, String lastName){
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 
-	public String getFirstName() {
-		return firstName;
-	}
+    private String firstName;
+    private String lastName;
+    private String emailAdress;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public User(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getEmailAdress() {
-		return emailAdress;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setEmailAdress(String emailAdress) {
-		this.emailAdress = emailAdress;
-	}
-	
-	@Override
-	public String toString() {
-		return firstName + " " + lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmailAdress() {
+        return emailAdress;
+    }
+
+    public void setEmailAdress(String emailAdress) {
+        this.emailAdress = emailAdress;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 
 }
 ```
 
-- Update SpringBeanApplication
-
+Update SpringBeanApplication
 ```java
 @SpringBootApplication 
 @ComponentScan({"com.jvanhouteghem.main", "com.jvanhouteghem.foo"})
 public class SpringBeanApplication {
-	
-	// Create bean withing spring boot application
-	@Bean
-	public User user(){
-		return new User("Jonathan", "Vanhouteghem");
-	}
+
+    // Create bean withing spring boot application
+    @Bean
+    public User user(){
+        return new User("Jonathan", "Vanhouteghem");
+    }
 
     public static void main(final String[] args) throws Exception {
-    	//SpringApplication.run(WebApplication.class, args);
-    	
-    	ApplicationContext ctx = SpringApplication.run(SpringBeanApplication.class,  args);
-    	
-    	// Show all the beans that Spring just manages for us out of the box
-    	String[] beanNames = ctx.getBeanDefinitionNames();
-    	Arrays.sort(beanNames);
-    	for (String beanName : beanNames){
-    		System.out.println(beanName);
-    	}
-    	
-    	System.out.println(ctx.getBean("user").toString());
-    	
+        //SpringApplication.run(WebApplication.class, args);
+
+        ApplicationContext ctx = SpringApplication.run(SpringBeanApplication.class,  args);
+
+        // Show all the beans that Spring just manages for us out of the box
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames){
+            System.out.println(beanName);
+        }
+
+        System.out.println(ctx.getBean("user").toString());
+
     }
 
 }
 ```
 
-2- Dependency injection
+## 3. Dependency injection
 
 - Create new class in com.jvanhouteghem.foo and call it NotificationService
 
 ```java
 @Service
 public class NotificationService {
-	
-	public NotificationService(){
-		
-	}
-	
-	public void Send(){
-		
-	}
-	
-	public void sendAssync(){
-		
-	}
-	
-	@Override
-	public String toString() {
-		return "NotificationService";
-	}
+
+    public NotificationService(){
+
+    }
+
+    public void Send(){
+
+    }
+
+    public void sendAssync(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "NotificationService";
+    }
 
 }
 ```
 
-- Create new class in com.jvanhouteghem.main and call it PageController
-In this class we want to retrieve data from NotificationService. Several methods exists but it's recommanded to use setter injection (testability).
+- Create new class in com.jvanhouteghem.main and call it PageController In this class we want to retrieve data from NotificationService. Several methods exists but it's recommanded to use setter injection (testability).
 
 ```java
 @RestController
 public class PageController {
-	
-	// Avoid this (not testable)
-	//@Autowired
-	//private NotificationService notificationService;
 
-	// Better but avoid this too : 
-	/*@Autowired
-	public PageController(NotificationService notificationService) {
-		this.notificationService = notificationService;
-	}*/
-	
-	// Use this (setter based injection)
-	private NotificationService notificationService;
-	@Autowired
-	public void setNotificationService(NotificationService notificationService) {
-		this.notificationService = notificationService;
-	}
+    // Avoid this (not testable)
+    //@Autowired
+    //private NotificationService notificationService;
 
-	@RequestMapping("/page")
-	public String home(){
-		return notificationService.toString();
-	}
-	
-	
+    // Better but avoid this too : 
+    /*@Autowired
+    public PageController(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }*/
+
+    // Use this (setter based injection)
+    private NotificationService notificationService;
+    @Autowired
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
+    @RequestMapping("/page")
+    public String home(){
+        return notificationService.toString();
+    }
+
+
 }
 ```
 

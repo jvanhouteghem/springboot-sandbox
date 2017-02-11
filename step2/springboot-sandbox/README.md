@@ -8,7 +8,7 @@
 ```java
 package com.jvanhouteghem.main;
 
-@SpringBootApplication // = @Configuration + @EnableAutoConfiguration + @ComponentScan
+@SpringBootApplication // = @Configuration + @EnableAutoConfiguration + WebApplication
 public class SpringBeanApplication {
 
     public static void main(final String[] args) throws Exception {
@@ -260,7 +260,7 @@ public class PageController {
 ```
 
 ### @SpringBootApplication
-@SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan
+@SpringBootApplication = @Configuration + @EnableAutoConfiguration + WebApplication
 
 The app configuration annotation basically says this class right here is a source of definitions for the application context.
 So if we create beans here they're going to be in the application context component scan says hey i want you to scan for components configurations and services within this package.

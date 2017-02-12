@@ -21,7 +21,7 @@ Go back and refresh page and use "user" and "pass"
 
 At this point we haven't authorized specific users to have access to different sections and we have only one account.
 
-## III. Custom configuration
+## III. Custom configuration (part 1)
 
 1) Create package and call it com.jvanhouteghem.config
 
@@ -120,4 +120,63 @@ public class PostController {
 
 10) Try http://localhost:8080/post/user and http://localhost:8080/post/admin
 
+## IV. Custom configuration (part 2)
 
+1) Add custom user and admin by updating SecurityConfig
+
+```java
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+	@Autowired
+	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+		auth
+			.inMemoryAuthentication()
+				.withUser("admin")
+				.password("password")
+				.roles("ADMIN")
+			.and()
+				.withUser("user")
+				.password("password")
+				.roles("USER");
+	}
+	
+}
+```
+
+2) Update security Config
+
+```java
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+	@Autowired
+	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+		auth
+			.inMemoryAuthentication()
+				.withUser("admin")
+				.password("password")
+				.roles("ADMIN")
+			.and()
+				.withUser("user")
+				.password("password")
+				.roles("USER");
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception{
+		http
+			.authorizeRequests()
+				.antMatchers("/posts/list").permitAll() // to allow anything from posts/list
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.anyRequest().authenticated()
+				.and()
+			.formLogin()
+				.and()
+			.logout();
+	}
+	
+}
+```

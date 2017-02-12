@@ -14,10 +14,15 @@ public class PostController {
 		return "admin";
 	}
 	
-	@Secured("ROLE_USER")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping("/user")
 	public String user(){
+		foo(); // no need to secure this method with secure annotation
 		return "user";
+	}
+	
+	private void foo(){
+		// do something
 	}
 	
 }

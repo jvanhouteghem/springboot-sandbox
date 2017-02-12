@@ -180,3 +180,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 }
 ```
+
+## IV. Custom login page 
+
+http://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/guides/form.html

@@ -23,10 +23,10 @@ At this point we haven't authorized specific users to have access to different s
 
 ## III. Custom configuration
 
-1. Create package and call it com.jvanhouteghem.config
+1) Create package and call it com.jvanhouteghem.config
 
 
-2. Add inside the package a new class, call it SecurityConfig
+2) Add inside the package a new class, call it SecurityConfig
 
 ```java
 @Configuration
@@ -37,16 +37,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
 ```
 
-3. Update SpringMVCApplication to scan the new package
+3) Update SpringMVCApplication to scan the new package
 
 
-4. Update application.properties by adding 
+4) Update application.properties by adding 
 
 ```
 security.user.role=USER
 ```
 
-5. Create new controller class
+5) Create new controller class
 
 ```java
 @Controller
@@ -61,7 +61,7 @@ public class PostController {
 }
 ```
 
-6. Create new view src/main/webapp/user.html
+6) Create new view src/main/webapp/user.html
 
 ```
 <!DOCTYPE html>
@@ -76,12 +76,12 @@ public class PostController {
 </html>
 ```
 
-7. Go to localhost:8080/post/list
+7) Go to localhost:8080/post/list
 
 At this point you still can access to all pages.
 
 
-8. Create new view src/main/webapp/admin.html
+8) Create new view src/main/webapp/admin.html
 ```
 <!DOCTYPE html>
 <html>
@@ -96,7 +96,7 @@ At this point you still can access to all pages.
 ```
 
 
-9. Update PostController by adding role that user have
+9) Update PostController by adding role that user have
 
 ```java
 @Controller
@@ -118,6 +118,6 @@ public class PostController {
 }
 ```
 
-10. Try http://localhost:8080/post/user and http://localhost:8080/post/admin
+10) Try http://localhost:8080/post/user and http://localhost:8080/post/admin
 
 

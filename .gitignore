@@ -7,3 +7,4 @@ target/
 .metadata/*
 .springBeans
 RemoteSystemsTempFiles
+.recommenders

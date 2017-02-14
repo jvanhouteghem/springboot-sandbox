@@ -1,0 +1,20 @@
+<p class="generalinfos">This is the partial for view 1.</p>
+<p class="fromcontroller">{{varfromcontroller1}}</p>
+<p class="fromservice">role : {{userRole}}</p>
+<p class="fromservice">{{sharedVar}}</p>
+
+<!--<input class="fromservice" type="text" ng-model="sharedVar" ng-change="inputSharedVar(sharedVar)">-->
+
+<md-input-container flex="50">
+
+    <label>Service shared value</label>
+    <input class="fromservice" type="text" ng-model="sharedVar" ng-change="inputSharedVar(sharedVar)">
+    <div ng-messages="projectForm.clientName.$error">
+        <div ng-message="required">This is required.</div>
+    </div>
+
+    <p class="fromservicetoken">{{readToken}}</p>
+    <button class="fromservicetoken" ng-click="setToken()">Create Token</button><button class="fromservicetoken" ng-click="deleteToken()">Delete Token</button> 
+    <p class="fromserviceHttp">{{jsonFromHttpget}}</p>
+
+</md-input-container>

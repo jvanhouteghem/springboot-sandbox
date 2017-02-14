@@ -1,0 +1,49 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.generalinfos{
+  color: #9e9e9e
+}
+
+.fromcontroller{
+  color:#9c27b0
+}
+
+.fromservice{
+  color:#2196f3
+}
+
+.fromserviceHttp{
+  color:#ffc107
+}
+
+.fromservicetoken{
+  color:#8BC34A
+}
+
+.fromcommon{
+  color:#e91e63
+}

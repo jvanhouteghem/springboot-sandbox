@@ -6,6 +6,4 @@ target/
 *.iml
 .metadata/*
 .springBeans
-RemoteSystemsTempFiles
-.recommenders
-corb/
+src/main/resources/public/bower_components/

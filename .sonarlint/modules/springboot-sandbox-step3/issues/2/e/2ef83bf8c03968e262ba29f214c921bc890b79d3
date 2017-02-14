@@ -1,6 +1,0 @@
-
-bsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Èà€—
-Q
-squid:S106";Replace this usage of System.out or System.err by a logger.(›Œ™
-bsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.( Ðó‘
-Vsquid:S1118":Add a private constructor to hide the implicit public one.(ØäÔÐùÿÿÿÿ
